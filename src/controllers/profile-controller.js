@@ -13,8 +13,8 @@ class ProfileController {
 
   async editProfile(req, res) {
     try {
-      const { isValid, error } = profileService.validateEditProfileData(req);
-      
+        
+      const { isValid, error } = validateEditProfileData(req);
       if (!isValid) {
         throw new Error(error || "Invalid Edit Request");
       }
