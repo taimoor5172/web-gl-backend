@@ -13,17 +13,18 @@ class ProfileController {
 
   async editProfile(req, res) {
     try {
-        
-      const { isValid, error } = validateEditProfileData(req);
-      if (!isValid) {
-        throw new Error(error || "Invalid Edit Request");
-      }
+      // console.log(req.body);
+      // const { isValid, error } = validateEditProfileData(req);
+      // if (!isValid) {
+      //   throw new Error(error || "Invalid Edit Request");
+      // }
       
       const loggedInUser = req.user;
+      console.log(req.body);
       const updatedUser = await profileService.updateProfile(loggedInUser, req.body);
       
       res.json({
-        message: `${updatedUser.firstName}, your profile updated successfully`,
+        message: `${updatedUser.name}, your profile updated successfully`,
         data: updatedUser,
       });
     } catch (err) {
