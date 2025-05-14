@@ -16,23 +16,25 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-// const authRouter = require("./routes/auth");
+const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 // const userRouter = require("./routes/user");
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
-app.use("/", userRouter);
+// app.use("/", userRouter);
 
+const server = http.createServer(app);
 
+const PORT = process.env.PORT || 8080;
 
 connectDB()
   .then(() => {
     console.log("Database connection established...");
-    server.listen(process.env.PORT, () => {
-      console.log("Server is successfully listening on port 7777...");
+    server.listen(PORT, () => {
+      console.log(`Server is successfully listening on ${PORT}...`);
     });
   })
   .catch((err) => {
-    console.error("Database cannot be connected!!");
+    console.error("Database cannot be connected!! :"+err);
   });
